@@ -7,10 +7,45 @@
 </ion-header>
 
 <ion-content>
-  <ion-card button *ngFor="let activity of (activityList | async)">
+  <div *ngIf="!activityList">
+    <ion-card>
+      <ion-skeleton-text class="skeleton-image" animated></ion-skeleton-text>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-skeleton-text class="skeleton-image" animated></ion-skeleton-text>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-skeleton-text class="skeleton-image" animated></ion-skeleton-text>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content pullingText="Refresh" refreshingText="New data is coming...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card [routerLink]="['activity-detail', activity.id]" button *ngFor="let activity of (activityList | async)">
     <ion-img [src]="activity.cropped"></ion-img>
     <ion-card-header>
       <ion-card-title>{{activity.name}}</ion-card-title>
     </ion-card-header>
   </ion-card>
+  <ion-infinite-scroll (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content loadingText="Loading...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

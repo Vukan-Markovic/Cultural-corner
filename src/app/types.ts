@@ -13,3 +13,8 @@ export interface Activity {
     category_id: string;
     keywords: string;
 }
+
+export interface LoginCredential {
+    email: string;
+    password: string;
+}

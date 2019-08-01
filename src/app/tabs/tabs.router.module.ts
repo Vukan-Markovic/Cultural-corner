@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { CanEnterTabsPageGuard } from '../can-enter-tabs-page.guard';
 
 const routes: Routes = [
   {
     path: 'tabs',
     component: TabsPage,
+    canActivate: [CanEnterTabsPageGuard],
     children: [
       {
         path: 'tab1',
@@ -13,6 +15,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../tab1/tab1.module#Tab1PageModule'
+          },
+          {
+            path: 'activity-detail/:activityID',
+            loadChildren: '../activity-detail/activity-detail.module#ActivityDetailPageModule'
           }
         ]
       },
@@ -43,7 +49,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/login',
     pathMatch: 'full'
   }
 ];
@@ -54,4 +60,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

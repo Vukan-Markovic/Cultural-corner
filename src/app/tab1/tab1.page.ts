@@ -11,7 +11,20 @@ import { ActivityService } from '../activity.service';
 export class Tab1Page {
   activityList: Observable<Activity[]>;
 
-  constructor(activityService: ActivityService) {
+  constructor(public activityService: ActivityService) {
     this.activityList = activityService.getAllActivities();
+  }
+
+  loadMoreData(event) {
+    setTimeout(() => {
+      event.target.complete();
+    }, 3000);
+  }
+
+  refresh(event) {
+    setTimeout(() => {
+      this.activityList = this.activityService.getAllActivities();
+      event.target.complete();
+    }, 3000);
   }
 }
