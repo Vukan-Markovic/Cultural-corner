@@ -8,6 +8,9 @@ import { ActivityVideoPage } from '../activity-video/activity-video.page';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Plugins } from '@capacitor/core';
+
+const { Toast } = Plugins;
 
 @Component({
   selector: 'app-activity-detail',
@@ -48,15 +51,18 @@ export class ActivityDetailPage implements OnInit {
               .collection("favorites")
               .add(activity)
               .then(() => {
-                const toast = this._toastController.create({
-                  message: "The activity " + activity.name + " was added to your favorites",
-                  duration: 3500,
-                  position: "top"
-                });
-                toast
-                  .then((toastMessage) => {
-                    toastMessage.present();
-                  })
+                //   const toast = this._toastController.create({
+                //     message: "The activity " + activity.name + " was added to your favorites",
+                //     duration: 3500,
+                //     position: "top"
+                //   });
+                //   toast
+                //     .then((toastMessage) => {
+                //       toastMessage.present();
+                //     })
+                Toast.show({
+                  text: "The activity " + activity.name + " was added to your favorites"
+                })
               });
           }
         })
