@@ -1,3 +1,3 @@
 ## Cultural corner
 
-Ionic mobile web application that showing art videos
+The Ionic mobile web application that showing art videos
